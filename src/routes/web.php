@@ -24,7 +24,6 @@ Route::get('/top', function() {
     return view('user.top');
     })->name('index');
 
-Route::get('/user', [UserController::class, 'index']);
 
 
 
