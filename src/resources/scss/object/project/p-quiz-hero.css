@@ -1,0 +1,8 @@
+.p-quiz-hero {
+  background: url("/image/quiz/sp/bg-hero.jpg") center center/cover;
+}
+@media screen and (min-width: 768px) {
+  .p-quiz-hero {
+    background-image: url("/image/quiz/bg-hero.jpg");
+  }
+}/*# sourceMappingURL=p-quiz-hero.css.map */
