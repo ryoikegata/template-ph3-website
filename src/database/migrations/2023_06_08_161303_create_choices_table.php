@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('choice');
             $table->boolean('is_correct');
             $table->timestamps();
-            $table->foreign('question_id')->references('id')->on('questions');
+            $table->softDeletes();
+            $table->foreign('question_id')->references('id')->on('questions')->onUpdate('CASCADE')->onDelete('CASCADE');
         });
     }
 

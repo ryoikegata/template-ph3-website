@@ -20,15 +20,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/top', function() {
-    return view('user.top');
-    })->name('index');
 
-    Route::get('/quiz', [QuizController::class, 'show_quizzes'])->name('quizzes');
+Route::resources([
+    'top' => QuizController::class,
+    'quiz' => QuizController::class,
+    'quiz/detail/{id}' => QuizController::class,
+    'quiz/delete/{id}' => QuizController::class,
+]);
 
-    Route::get('/quiz/detail/{id}', [QuizController::class, 'detail']);
 
-    Route::get('/quiz/delete/{id}', [QuizController::class, 'destroy']);
 
 
 

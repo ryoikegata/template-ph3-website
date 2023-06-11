@@ -3,6 +3,11 @@
 
 @section('content')
 @include('components.top.header')
+@if(session('message'))
+    <div class="alert alert-success z-20 flex justify-center mt-20">
+        {{ session('message') }}
+    </div>
+@endif
 <div class="mt-20 flex justify-center text-6xl">
     <h1>クイズ一覧</h1>
 </div>
