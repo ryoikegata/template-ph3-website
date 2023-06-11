@@ -7,21 +7,21 @@ use Illuminate\Http\Request;
 
 class QuizController extends Controller
 {
-
-    public function index() {
-        return view('user.top');
-        }
-
-    public function show_quizzes()
+    public function index()
     {
         $questions = Question::with('choices')->get();
         return view('user.quiz', compact('questions'));
     }
 
-    public function detail($id)
+    public function show($id)
     {
         $question = Question::with('choices')->where('id',$id)->get();
-        return view('user.detail', compact('question'));
+        return view('user.show', compact('question'));
+    }
+
+    public function create()
+    {
+        return view('user.create');
     }
 
 

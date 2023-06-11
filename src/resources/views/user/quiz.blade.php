@@ -13,7 +13,7 @@
 </div>
     @foreach ($questions as $question)
     <div class="flex justify-center pt-20">
-        <a href="/quiz/detail/{{ $question->id }}">{{ $question->question }}</a>
+        <a href="/quiz/show/{{ $question->id }}">{{ $question->question }}</a>
         <div>
         <a href="../edit" class="">編集</a>
         <a href="../quiz/delete/{{$question->id}}" class="">削除</a>
@@ -25,6 +25,7 @@
 </div>
 @endforeach
 @endforeach
+<a href="../quiz/create" class="flex justify-center pt-20">新規作成</a>
 @endsection
 
 

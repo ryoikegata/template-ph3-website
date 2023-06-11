@@ -17,16 +17,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('user.top');
 });
 
 
-Route::resources([
-    'top' => QuizController::class,
-    'quiz' => QuizController::class,
-    'quiz/detail/{id}' => QuizController::class,
-    'quiz/delete/{id}' => QuizController::class,
-]);
+Route::get('/quiz', [QuizController::class, 'index'])->name('quizzes');
+Route::get('/quiz/show/{id}', [QuizController::class, 'show']);
+Route::get('/quiz/delete/{id}', [QuizController::class, 'destroy']);
+Route::delete('/quiz/delete/{id}', [QuizController::class, 'destroy']);
+
+Route::get('/quiz/create', [QuizController::class, 'create']);
 
 
 
