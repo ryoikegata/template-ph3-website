@@ -1,6 +1,9 @@
-@extends ('layouts.index')
+@extends('layouts.index')
 
 @section('content')
+@include('components.top.header')
+
+<main class="main">
     <section class="top__hero">
         <div class="top__hero__heading">
             <h2 class="top__hero__lead">学生プログラミングコミュニティ POSSE（ポッセ）</h2>
@@ -26,19 +29,12 @@
             </p>
         </div>
     </section>
+
+</main>
+
+    @include('components.top.line')
+    @include('components.top.footer')
+
 @endsection
 
-@section('banner')
-    <div class="banner">
-        <a href="https://line.me/R/ti/p/@651htnqp?from=page" class="banner__link">
-            <div class="banner__icon line__icon">
-                <img src="{{ asset('images/icon/icon-line.svg') }}" alt="LINE">
-            </div>
-            <p class="banner__text">POSSE公式LINEで<br class="break">最新情報をGET！</p>
-            <div class="banner__icon">
-                <img src="{{ asset('images/icon/icon-link-light.svg') }}" alt="LINEリンク">
-            </div>
-        </a>
-    </div>
-@endsection
 

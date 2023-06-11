@@ -24,6 +24,11 @@ Route::get('/top', function() {
     return view('user.top');
     })->name('index');
 
+    Route::get('/quiz', [QuizController::class, 'show_quizzes'])->name('quizzes');
+
+    Route::get('/quiz/detail/{id}', [QuizController::class, 'detail']);
+
+    Route::get('/quiz/delete/{id}', [QuizController::class, 'destroy']);
 
 
 
