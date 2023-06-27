@@ -17,7 +17,6 @@ class Question extends Model
 
     protected $fillable =
     [
-        'id',
         'question',
     ];
 

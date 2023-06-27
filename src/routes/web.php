@@ -17,27 +17,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('user.top');
+    return view('top');
 });
+Route::get('/{q}', [QuizController::class, 'index']);
 
-
-Route::get('/quiz', [QuizController::class, 'index'])->name('quizzes');
-Route::get('/quiz/show/{id}', [QuizController::class, 'show']);
+Route::resource('/quiz', QuizController::class);
 Route::get('/quiz/delete/{id}', [QuizController::class, 'destroy']);
 Route::delete('/quiz/delete/{id}', [QuizController::class, 'destroy']);
-
-Route::get('/quiz/create', [QuizController::class, 'create']);
-
-
-
-
-
-
 
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
