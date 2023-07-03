@@ -1,0 +1,8 @@
+@import "common";
+@import "reset";
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
