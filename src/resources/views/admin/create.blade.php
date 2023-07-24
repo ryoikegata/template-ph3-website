@@ -1,6 +1,11 @@
 <x-head></x-head>
         @include('layouts.navigation')
 
+        @if(session('message'))
+    <div class="alert alert-success z-20 flex justify-center mt-20">
+        {{ session('message') }}
+        @endif
+
 <h1 class="pt-40 flex justify-center">新規作成</h1>
 <form action="{{ route('admin.store') }}" class="pt-10" method="post" enctype="multipart/form-data">
 @csrf
