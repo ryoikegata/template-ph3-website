@@ -1,4 +1,4 @@
-<x-layout>
+<x-app-layout>
   <x-header></x-header>
 <div class="mt-20 flex justify-center text-6xl">
     <h1>クイズ</h1>
@@ -14,4 +14,4 @@
 @endforeach
 @endforeach
 
-</x-layout>
+</x-app-layout>

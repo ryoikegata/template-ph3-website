@@ -5,13 +5,20 @@ namespace App\Http\Controllers;
 use App\Models\Question;
 use App\Models\Choice;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class QuizController extends Controller
 {
     public function index()
     {
-        $questions = Question::with('choices')->get();
-        return   view('admin.index', compact('questions'));
+        // if ($q == 'q') {
+        //     $questions = Question::with('choices')->get();
+        //     return   view('quiz', compact('questions'));
+        // }
+        $questions = Question::with('choices')->paginate(3);
+        $d_questions = Question::onlyTrashed()->get();
+        return   view('admin.index', compact('questions','d_questions'));
     }
 
     public function show($id, Request $request)
@@ -38,42 +45,50 @@ class QuizController extends Controller
     public function store(Request $request)
 {
     $data = $request->all();
-    Question::add($data);
+    $question = new Question();
+    $question->add($data);
     return  redirect()->route('admin.index');
 }
 
 
 public function update (Request $request, $id)
 {
-
-        $req = $request->all();
+        $data = $request->all();
+                        // バリデーション
+                        $validator = Validator::make($data, [
+                            'question' => 'required|max:200',
+                            'choices1' => 'required|max:100',
+                            'choices2' => 'required|max:100',
+                            'choices3' => 'required|max:100',
+                        ]);
+                
+                        if ($validator->fails()) {
+                            // バリデーションエラーがある場合はエラーメッセージを返すなどの適切な処理を行う
+                            session()->flash('message', 'クイズの編集に失敗しました');
+                            return redirect()->route('admin.edit', ['admin' => $id])->withErrors($validator)->withInput();
+                        }else {
         $question = Question::findOrFail($id);
-        $question->question = $req['question'];
+        $question->question = $data['question'];
         $question->save();
 
-        //  dd($req);
+        
         $choices = [];
         for ($i = 1; $i <= 3; $i++) {
-            $selectedChoice = $request->input('selected' . $i);
-            $choiceValue = $req['choice' . $i . '_'];
-            $choiceId = $req['choice_id' . $i];
-
+            $choiceValue = $data['choices' . $i];
+            $choiceId = $data['choiceIds' . $i];
+            $selectedChoice = isset($data['selected' . $i]) ? 1 : 0;
+            
+            
             $choice = Choice::findOrFail($choiceId);
             $choice->choice = $choiceValue;
-            // 選択された値に対する処理を行う
-            if ($selectedChoice !== null) {
-                $choice->is_correct = 1;
-            } else {
-                $choice->is_correct = 0;
-            }
-
+            $choice->is_correct = $selectedChoice;
+            
             $choice->save();
-
             $choices[] = $choice;
         }
-
-    session()->flash('message', 'クイズを更新しました');
-    return redirect()->route('admin.index');
+        session()->flash('message', 'クイズの更新がされました');
+        return redirect()->route('admin.index');
+                        }
     }
 
 

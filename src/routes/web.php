@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 });
+Route::get('/q', [QuizController::class, 'index']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -32,4 +33,5 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 
-Route::resource('/admin', QuizController::class);
+Route::resource('/admin', QuizController::class)->middleware(['auth', 'verified']);
+

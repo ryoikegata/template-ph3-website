@@ -41,5 +41,15 @@
 </div>
 @endforeach
 @endforeach
+
+
+
+{{ $questions->links() }}
+
+<!-- 削除済みのクイズを表示 -->
+<h2>削除済みのクイズ</h2>
+@foreach ($d_questions as $d_question)
+<p class="text-xs text-red-700">{{ $d_question->question }}</p>
+@endforeach
 <a href="{{ route('admin.create') }}" class="flex justify-center pt-20">新規作成</a>
 <script src="{{ asset('js/modal.js') }}"></script>
